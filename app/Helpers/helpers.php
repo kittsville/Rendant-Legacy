@@ -6,7 +6,7 @@
  *
  * @return string Creates 
  */
-function newId() {
+function newBase64Id() {
     return rtrim(strtr(base64_encode(openssl_random_pseudo_bytes(9)), '+/', '-_'), '=');
 }
 
@@ -16,6 +16,6 @@ function newId() {
  * @param  string $id The string to be validated
  * @return bool       Whether string has the correct ID format
  */
-function validId($id) {
+function validBase64Id($id) {
     return (bool) preg_match('/^[A-Za-z0-9\-_]{12}$/', $id);
 }
