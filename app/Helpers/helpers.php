@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Generates 11 character Base64 ID
+ * Generates 12 character Base64 ID
  * @see https://en.wikipedia.org/wiki/Base64#URL_applications
  *
  * @return string Creates 
