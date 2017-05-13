@@ -11,6 +11,11 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
+// Redirects naked URL to current API version
+$app->get('', function() use ($app) {
+    return redirect()->route('root');
+});
+
+$app->group(['prefix' => '/v1'], function () use ($app) {
+    $app->get('', ['uses' => 'ApiController@viewRoutes', 'as' => 'root']);
 });
