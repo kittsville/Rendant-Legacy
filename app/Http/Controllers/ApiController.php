@@ -54,6 +54,13 @@ class ApiController extends Controller
                     ],
                 ],
                 [
+                    'method'      => 'DELETE',
+                    'url'         => '/results/{id}',
+                    'needs_login' => true,
+                    'needs_admin' => false,
+                    'comments'    => [],
+                ],
+                [
                     'method'      => 'POST',
                     'url'         => '/results/new',
                     'needs_login' => true,
