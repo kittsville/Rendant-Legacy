@@ -21,6 +21,7 @@ class AddStatusToResult extends Migration
                 'analysing',  # Analyses the post history of each user
                 'failed',     # Something went wrong
                 'finished',   # Successfully completed request
+                'deleted',    # User deleted Result or their account
             ])->default('validating')->after('url');
         });
     }
