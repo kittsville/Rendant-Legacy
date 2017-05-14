@@ -19,3 +19,11 @@ $app->get('', function() use ($app) {
 $app->group(['prefix' => '/v1'], function () use ($app) {
     $app->get('', ['uses' => 'ApiController@viewRoutes', 'as' => 'root']);
 });
+
+// Routes for creating/viewing Results
+$app->group(['prefix' => '/v1/results'], function () use ($app) {
+    $app->get('',               'PlaceholderController@viewResults');
+    $app->post('new',           'PlaceholderController@newResult');
+    $app->get('{result_id}',    'PlaceholderController@viewResult');
+    $app->delete('{result_id}', 'PlaceholderController@deleteResult');
+});
