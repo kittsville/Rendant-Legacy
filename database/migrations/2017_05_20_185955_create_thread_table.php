@@ -19,8 +19,8 @@ class CreateThreadTable extends Migration
             // https://www.reddit.com/dev/api#fullnames
             $table->string('reddit_id', 20)->unique();
             
-            $table->string('title', 300); # 'Updoot this to the frontpage!'
-            $table->string('url',   50);  # 'updoot_this_to_the_frontpage'
+            $table->string('title',     300); # 'Updoot this to the frontpage!'
+            $table->string('permalink', 50);  # 'updoot_this_to_the_frontpage'
             
             // Subreddit that has been brigaded
             $table->integer('subreddit_id')->unsigned();
