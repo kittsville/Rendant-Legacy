@@ -80,7 +80,8 @@ class Handler extends ExceptionHandler
             'error' => [
                 'code'    => $status_code,
                 'message' => $message,
-            ]
+            ],
+            'data' => null,
         ], $status_code);
     }
 }
