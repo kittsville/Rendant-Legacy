@@ -45,6 +45,42 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+        if ($e instanceof ModelNotFoundException) {
+            $status_code = 404;
+            $message     = $e->getModel() . ' not found';
+        } elseif ($e instanceof HttpException) {
+            $status_messages = [
+                403 => 'Access Forbidden',
+                404 => 'Resource not Found',
+                405 => 'Incorrect HTTP Method (GET/POST/etc.) used',
+                410 => 'Resource Deleted',
+                429 => 'API Rate Limit Exceeded',
+                500 => 'Server Error',
+                501 => 'Not yet implemented',
+                503 => 'API temporarily unavailable',
+            ];
+            
+            $status_code = $e->getStatusCode();
+            $message = $status_messages[$status_code];
+        } else {
+            $rendered = parent::render($request, $e);
+            
+            $status_code = $rendered->getStatusCode();
+            
+            $message = class_basename($e) . ' in ' . basename($e->getFile()) . ' line ' . $e->getLine();
+            
+            $details = $e->getMessage();
+            
+            if ($details !== '') {
+                $message .= ': ' . $details;
+            }
+        }
+        
+        return response()->json([
+            'error' => [
+                'code'    => $status_code,
+                'message' => $message,
+            ]
+        ], $status_code);
     }
 }
